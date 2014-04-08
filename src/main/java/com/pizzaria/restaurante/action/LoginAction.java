@@ -9,7 +9,6 @@ package com.pizzaria.restaurante.action;
 import java.io.Serializable;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
-import javax.inject.Named;
 
 /**
  *
