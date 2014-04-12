@@ -14,6 +14,14 @@
             <p:panel>
                 <f:facet name="header">Testando</f:facet>
                 <h:outputText value="#{login.testeBean}" />
+                <p:dataTable value="#{login.result}" var="teste">
+                    <p:column>
+                        <h:outputText value="#{teste['user_name']}" />
+                    </p:column>
+                    <p:column>
+                        <h:outputText value="#{teste['user_pass']}" />
+                    </p:column>
+                </p:dataTable>
             </p:panel>
         </h:form>
     </h:body>
