@@ -6,23 +6,50 @@
       xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
-        <title>Codigos fontes JEE7</title>
+        <title>Pizzaria Alema</title>
         <meta name="viewport" content="width=device-width"/>
+        <style>
+            .banner-image{
+                display: block;
+                margin: 0 auto;
+                width: 700px;
+                height: 300px;
+                overflow: hidden;
+            }
+
+        </style>
     </h:head>
     <h:body>
-        <h:form>
-            <p:panel>
-                <f:facet name="header">Testando</f:facet>
-                <h:outputText value="#{login.testeBean}" />
-                <p:dataTable value="#{login.result}" var="teste">
-                    <p:column>
-                        <h:outputText value="#{teste['user_name']}" />
-                    </p:column>
-                    <p:column>
-                        <h:outputText value="#{teste['user_pass']}" />
-                    </p:column>
-                </p:dataTable>
-            </p:panel>
-        </h:form>
+        <p:layout fullPage="true">
+            <p:layoutUnit header="Menu" position="west" size="200">
+                <p:menu style="width:90%;">  
+                    <p:menuitem value="Pizza1" url="http://www.primefaces.org" />  
+                    <p:menuitem value="Pizza2" url="http://www.primefaces.org"/>  
+                    <p:menuitem value="Log-In" url="http://www.primefaces.org"/>  
+                </p:menu>
+            </p:layoutUnit>
+            <p:layoutUnit position="center">
+                <h:form>
+                    <p:menubar>  
+                        <p:submenu label="File" icon="ui-icon-document">  
+                            <p:submenu label="New" icon="ui-icon-contact">  
+                                <p:menuitem value="Project" url="#" />  
+                                <p:menuitem value="Other" url="#" />  
+                            </p:submenu>  
+                            <p:menuitem value="Open" url="#" />  
+                            <p:separator />  
+                            <p:menuitem value="Quit" url="#" />  
+                        </p:submenu>
+                    </p:menubar>
+                </h:form>
+                <p:spacer height="20" />
+                <div class="banner-image">
+                    <p:imageSwitch slideshowSpeed="5000" effect="fade">  
+                        <p:graphicImage value="images/pizza_1.jpg" width="600" height="300" />
+                        <p:graphicImage value="images/pizza_2.jpg" width="600" height="300" />
+                    </p:imageSwitch>  
+                </div>
+            </p:layoutUnit>
+        </p:layout>
     </h:body>
 </html>
