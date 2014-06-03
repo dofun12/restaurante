@@ -5,33 +5,23 @@
  */
 package com.pizzaria.restaurante.action;
 
+import com.pizzaria.restaurante.dao.LoginDao;
 import com.pizzaria.restaurante.dao.impl.LoginDaoImpl;
-import com.pizzaria.restaurante.model.Cliente;
 import com.pizzaria.restaurante.model.Usuario;
 import java.io.Serializable;
-import java.util.List;
-import java.util.Map;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
+import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
-import javax.faces.event.ActionEvent;
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
-import javax.xml.crypto.dsig.Transform;
-import org.hibernate.Query;
-import org.hibernate.Session;
-import org.hibernate.transform.Transformers;
+import javax.inject.Named;
 
 /**
  *
  * @author kevim
  */
 @SessionScoped
-@ManagedBean(name = "login")
+@Named(value = "login")
 public class LoginAction implements Serializable {
     private Usuario usuario;
     @EJB
@@ -77,13 +67,14 @@ public class LoginAction implements Serializable {
         this.usuario = usuario;
     }
 
-    public LoginDaoImpl getLoginDAO() {
+    public LoginDao getLoginDAO() {
         return loginDAO;
     }
 
-    public void setLoginDAO(LoginDaoImpl loginDAO) {
+    public void setLoginDAO(LoginDao loginDAO) {
         this.loginDAO = loginDAO;
     }
+
 
     public String getLogin() {
         return login;

@@ -17,8 +17,8 @@ import javax.ejb.Local;
 @Local
 public interface LoginDao {
 
-    Usuario getUsuario(String login, String senha);
+    public Usuario getUsuario(String login, String senha);
 
-    void salvar(Usuario u, Cliente c);
+    public void salvar(Usuario u, Cliente c);
     
 }

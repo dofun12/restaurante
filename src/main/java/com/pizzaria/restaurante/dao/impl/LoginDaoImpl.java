@@ -21,7 +21,7 @@ import org.hibernate.Query;
  * @author kevim
  */
 @Stateless
-public class LoginDaoImpl extends GenericDaoImpl<Usuario> implements LoginDao{
+public class LoginDaoImpl extends GenericDao<Usuario> implements LoginDao{
     @Override
     public Usuario getUsuario(String login,String senha){
         Query q = getSession().createQuery("from Usuario a where a.login=:login and a.senha = :senha");

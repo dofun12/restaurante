@@ -12,15 +12,15 @@ import com.pizzaria.restaurante.model.Usuario;
 import java.io.Serializable;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ViewScoped;
+import javax.enterprise.context.SessionScoped;
+import javax.inject.Named;
 
 /**
  *
  * @author kevim
  */
-@ViewScoped
-@ManagedBean(name = "cadastro")
+@SessionScoped
+@Named(value = "cadastro")
 public class CadastroAction implements Serializable {
     private String nome;
     private String login;
