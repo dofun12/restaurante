@@ -5,11 +5,18 @@
  */
 package com.pizzaria.restaurante.action;
 
+import com.pizzaria.restaurante.dao.LoginDAO;
+import com.pizzaria.restaurante.model.Cliente;
+import com.pizzaria.restaurante.model.Usuario;
 import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
 import javax.annotation.PostConstruct;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
+import javax.faces.event.ActionEvent;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -22,55 +29,74 @@ import org.hibernate.transform.Transformers;
  *
  * @author kevim
  */
+@SessionScoped
 @ManagedBean(name = "login")
 public class LoginAction implements Serializable {
-
-    private String testeBean;
-    private String valorBanco;
-    private EntityManagerFactory entityManagerFactory;
-    private List<Map<String,Object>> result;
+    private Usuario usuario;
+    private LoginDAO loginDAO;
+    private String login;
+    private String senha;
+    
     
     @PostConstruct
     public void init() {
-        setTesteBean("helll yeah bitches");
-        setUp();
+        loginDAO = new LoginDAO();
         
-        EntityManager entityManager = entityManagerFactory.createEntityManager();
-        entityManager.getTransaction().begin();
-        Session session = entityManager.unwrap(org.hibernate.Session.class);
-        Query q = session.createSQLQuery("select * from users");
-        q.setResultTransformer(Transformers.ALIAS_TO_ENTITY_MAP);
-        result = q.list();
-        entityManager.getTransaction().commit();
-        entityManager.close();
     }
 
-    protected void setUp(){
-        entityManagerFactory = Persistence.createEntityManagerFactory("restaurante-pu");
+    public String getNomeUsuario(){
+        Cliente cliente;
+        if(usuario!=null&&usuario.getClienteCollection()!=null){
+            if(usuario.getClienteCollection().iterator().hasNext()){
+                cliente = usuario.getClienteCollection().iterator().next();
+                if(cliente!=null){
+                    return cliente.getNome();
+                }
+            }
+        }
+        return "";
+    }
+    
+    public String logar(){
+        Usuario u = loginDAO.getUsuario(login, senha);
+        if(u!=null){
+            return "home.jsf";
+        }else{
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"Aviso","Usuario ou senha incorretos"));
+        }
+        return "";
     }
 
-    public String getTesteBean() {
-        return testeBean;
+    public Usuario getUsuario() {
+        return usuario;
     }
 
-    public void setTesteBean(String testeBean) {
-        this.testeBean = testeBean;
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
 
-    public String getValorBanco() {
-        return valorBanco;
+    public LoginDAO getLoginDAO() {
+        return loginDAO;
     }
 
-    public void setValorBanco(String valorBanco) {
-        this.valorBanco = valorBanco;
+    public void setLoginDAO(LoginDAO loginDAO) {
+        this.loginDAO = loginDAO;
     }
 
-    public List<Map<String, Object>> getResult() {
-        return result;
+    public String getLogin() {
+        return login;
     }
 
-    public void setResult(List<Map<String, Object>> result) {
-        this.result = result;
+    public void setLogin(String login) {
+        this.login = login;
+    }
+
+    public String getSenha() {
+        return senha;
+    }
+
+    public void setSenha(String senha) {
+        this.senha = senha;
     }
     
 }

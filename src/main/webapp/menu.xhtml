@@ -6,15 +6,9 @@
                 xmlns:c="http://java.sun.com/jsp/jstl/core">
     <h:form>
         <p:menubar >
-            <p:submenu label="File" icon="ui-icon-document">
-                <p:submenu label="New" icon="ui-icon-contact">
-                    <p:menuitem value="Project" url="#" />
-                    <p:menuitem value="Other" url="#" />
-                </p:submenu>
-                <p:menuitem value="Open" url="#" />
-                <p:separator />
-                <p:menuitem value="Quit" url="#" />
-            </p:submenu>
+            <p:menuitem value="Index" url="index.jsf" />
+            <p:menuitem value="Login" url="login.jsf" />
         </p:menubar>
+        <h:outputText value="#{login.getNomeUsuario()}" />
     </h:form>
 </ui:composition>
