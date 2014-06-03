@@ -8,11 +8,13 @@ package com.pizzaria.restaurante.dao;
 
 import com.pizzaria.restaurante.model.Cliente;
 import com.pizzaria.restaurante.model.Usuario;
+import javax.ejb.Local;
 
 /**
  *
  * @author kevim
  */
+@Local
 public interface LoginDao {
 
     Usuario getUsuario(String login, String senha);

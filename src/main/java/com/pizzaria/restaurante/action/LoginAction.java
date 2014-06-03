@@ -12,6 +12,7 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
 import javax.annotation.PostConstruct;
+import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
@@ -33,7 +34,8 @@ import org.hibernate.transform.Transformers;
 @ManagedBean(name = "login")
 public class LoginAction implements Serializable {
     private Usuario usuario;
-    private LoginDaoImpl loginDAO;
+    @EJB
+    private LoginDao loginDAO;
     private String login;
     private String senha;
     

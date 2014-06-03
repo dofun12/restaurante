@@ -11,6 +11,8 @@ import com.pizzaria.restaurante.model.Cliente;
 import com.pizzaria.restaurante.model.GrupoUsuario;
 import com.pizzaria.restaurante.model.GrupoUsuarioPK;
 import com.pizzaria.restaurante.model.Usuario;
+import javax.ejb.Local;
+import javax.ejb.Stateless;
 import org.hibernate.Query;
 
 
@@ -18,6 +20,7 @@ import org.hibernate.Query;
  *
  * @author kevim
  */
+@Stateless
 public class LoginDaoImpl extends GenericDaoImpl<Usuario> implements LoginDao{
     @Override
     public Usuario getUsuario(String login,String senha){

@@ -5,11 +5,13 @@
  */
 package com.pizzaria.restaurante.action;
 
+import com.pizzaria.restaurante.dao.LoginDao;
 import com.pizzaria.restaurante.dao.impl.LoginDaoImpl;
 import com.pizzaria.restaurante.model.Cliente;
 import com.pizzaria.restaurante.model.Usuario;
 import java.io.Serializable;
 import javax.annotation.PostConstruct;
+import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
@@ -25,7 +27,8 @@ public class CadastroAction implements Serializable {
     private String endereco;
     private String telefone;
     private String senha;
-    private LoginDaoImpl loginDAO;
+    @EJB
+    private LoginDao loginDAO;
     
     @PostConstruct
     public void init() {
