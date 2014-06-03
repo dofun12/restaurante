@@ -12,13 +12,19 @@
             </p:layoutUnit>
             <p:layoutUnit position="center">
                 <h:form>
-                    
                     <h:panelGrid columns="1">
+                        <h:outputText value="Nome" />
+                        <p:inputText value="#{cadastro.nome}"/>
                         <h:outputText value="Login" />
-                        <p:inputText value="#{login.login}"/>
                         <h:outputText value="Senha" />
-                        <p:inputText value="#{login.senha}"/>
-                        <p:commandButton value="Enviar" action="#{login.logar}" />
+                        <p:password id="pwd1" value="#{cadastro.senha}" match="pwd2" label="Password 1" required="true" feedback="true" inline="true" />
+                        <h:outputText value="Confirme a senha" />
+                        <p:password id="pwd2" value="#{cadastro.senha}" required="true"/>
+                        <h:outputText value="Endereco" />
+                        <p:inputText value="#{cadastro.endereco}" />
+                        <h:outputText value="Telefone/Celular" />
+                        <p:inputText value="#{cadastro.telefone}" />
+                        <p:commandButton value="Cadastrar"  actionListener="#{cadastro.cadastrar}" />
                     </h:panelGrid>
                 </h:form>
             </p:layoutUnit>

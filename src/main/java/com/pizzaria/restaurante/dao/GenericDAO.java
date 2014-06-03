@@ -41,15 +41,26 @@ public class GenericDAO<T, ID extends Serializable> {
     }
 
     public EntityManager getEm() {
-        if (em == null) {
-            setUp();
-            em = entityManagerFactory.createEntityManager();
+        if (em != null&& em.isOpen()) {
             return em;
         } else {
+            setUp();
+            em = entityManagerFactory.createEntityManager();
             return em;
         }
     }
 
+    public void persist(Object obj){
+        getEm().getTransaction().begin();
+        getEm().persist(obj);
+        getEm().getTransaction().commit();
+        getEm().flush();
+    }
+    
+    public void close(){
+        //getEm().close();
+    }
+    
     public Session getSession(){
         return getEm().unwrap(org.hibernate.Session.class);
     }

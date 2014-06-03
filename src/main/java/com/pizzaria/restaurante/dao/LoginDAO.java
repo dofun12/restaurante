@@ -6,7 +6,10 @@
 
 package com.pizzaria.restaurante.dao;
 
+import com.pizzaria.restaurante.model.Cliente;
 import com.pizzaria.restaurante.model.Usuario;
+import java.util.ArrayList;
+import java.util.Collection;
 import org.hibernate.Query;
 
 
@@ -22,5 +25,13 @@ public class LoginDAO extends GenericDAO<Usuario,Integer>{
         q.setMaxResults(1);
         Usuario u = (Usuario)q.uniqueResult();
         return u;
+    }
+    public void salvar(Usuario u,Cliente c){
+        Collection<Cliente> clients = new ArrayList<Cliente>();
+        clients.add(c);
+        u.setClienteCollection(clients);
+        persist(c);
+        persist(u);
+        close();
     }
 }
