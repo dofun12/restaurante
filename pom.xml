@@ -44,14 +44,14 @@
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>org.primefaces</groupId>
+            <groupId>primefaces</groupId>
             <artifactId>primefaces</artifactId>
-            <version>4.0</version>
+            <version>5.0</version>
         </dependency>
         <dependency>
             <groupId>org.primefaces.extensions</groupId>
             <artifactId>all-themes</artifactId>
-            <version>1.0.7</version>
+            <version>1.0.8</version>
         </dependency>
         <!-- Tomcat Helpers -->
         <dependency>
