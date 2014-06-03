@@ -41,8 +41,6 @@ public class Cliente implements Serializable {
     private String endereco;
     @Column(name = "telefone")
     private String telefone;
-    @ManyToMany(mappedBy = "clienteCollection")
-    private Collection<Usuario> usuarioCollection;
 
     public Cliente() {
     }
@@ -82,16 +80,7 @@ public class Cliente implements Serializable {
     public void setTelefone(String telefone) {
         this.telefone = telefone;
     }
-
-    @XmlTransient
-    public Collection<Usuario> getUsuarioCollection() {
-        return usuarioCollection;
-    }
-
-    public void setUsuarioCollection(Collection<Usuario> usuarioCollection) {
-        this.usuarioCollection = usuarioCollection;
-    }
-
+    
     @Override
     public int hashCode() {
         int hash = 0;

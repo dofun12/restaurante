@@ -35,17 +35,7 @@ public class Usuario implements Serializable {
     private String senha;
     @Column(name = "ativo")
     private Boolean ativo;
-    @JoinTable(name = "Grupo_Usuario", joinColumns = {
-        @JoinColumn(name = "login", referencedColumnName = "login")}, inverseJoinColumns = {
-        @JoinColumn(name = "id_grupo", referencedColumnName = "id")})
-    @ManyToMany
-    private Collection<Grupo> grupoCollection;
-    @JoinTable(name = "Usuario_Cliente", joinColumns = {
-        @JoinColumn(name = "login", referencedColumnName = "login")}, inverseJoinColumns = {
-        @JoinColumn(name = "id_cliente", referencedColumnName = "id")})
-    @ManyToMany
-    private Collection<Cliente> clienteCollection;
-
+   
     public Usuario() {
     }
 
@@ -75,24 +65,6 @@ public class Usuario implements Serializable {
 
     public void setAtivo(Boolean ativo) {
         this.ativo = ativo;
-    }
-
-    @XmlTransient
-    public Collection<Grupo> getGrupoCollection() {
-        return grupoCollection;
-    }
-
-    public void setGrupoCollection(Collection<Grupo> grupoCollection) {
-        this.grupoCollection = grupoCollection;
-    }
-
-    @XmlTransient
-    public Collection<Cliente> getClienteCollection() {
-        return clienteCollection;
-    }
-
-    public void setClienteCollection(Collection<Cliente> clienteCollection) {
-        this.clienteCollection = clienteCollection;
     }
 
     @Override

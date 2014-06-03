@@ -41,14 +41,7 @@ public class Grupo implements Serializable {
     private String descricao;
     @Column(name = "ativo")
     private Boolean ativo;
-    @JoinTable(name = "Grupo_Direito", joinColumns = {
-        @JoinColumn(name = "id_grupo", referencedColumnName = "id")}, inverseJoinColumns = {
-        @JoinColumn(name = "id_direito", referencedColumnName = "id")})
-    @ManyToMany
-    private Collection<Direito> direitoCollection;
-    @ManyToMany(mappedBy = "grupoCollection")
-    private Collection<Usuario> usuarioCollection;
-
+   
     public Grupo() {
     }
 
@@ -79,25 +72,7 @@ public class Grupo implements Serializable {
     public void setAtivo(Boolean ativo) {
         this.ativo = ativo;
     }
-
-    @XmlTransient
-    public Collection<Direito> getDireitoCollection() {
-        return direitoCollection;
-    }
-
-    public void setDireitoCollection(Collection<Direito> direitoCollection) {
-        this.direitoCollection = direitoCollection;
-    }
-
-    @XmlTransient
-    public Collection<Usuario> getUsuarioCollection() {
-        return usuarioCollection;
-    }
-
-    public void setUsuarioCollection(Collection<Usuario> usuarioCollection) {
-        this.usuarioCollection = usuarioCollection;
-    }
-
+    
     @Override
     public int hashCode() {
         int hash = 0;

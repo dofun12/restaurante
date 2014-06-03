@@ -5,7 +5,7 @@
  */
 package com.pizzaria.restaurante.action;
 
-import com.pizzaria.restaurante.dao.LoginDAO;
+import com.pizzaria.restaurante.dao.impl.LoginDaoImpl;
 import com.pizzaria.restaurante.model.Cliente;
 import com.pizzaria.restaurante.model.Usuario;
 import java.io.Serializable;
@@ -33,27 +33,27 @@ import org.hibernate.transform.Transformers;
 @ManagedBean(name = "login")
 public class LoginAction implements Serializable {
     private Usuario usuario;
-    private LoginDAO loginDAO;
+    private LoginDaoImpl loginDAO;
     private String login;
     private String senha;
     
     
     @PostConstruct
     public void init() {
-        loginDAO = new LoginDAO();
+        loginDAO = new LoginDaoImpl();
         
     }
 
     public String getNomeUsuario(){
-        Cliente cliente;
-        if(usuario!=null&&usuario.getClienteCollection()!=null){
-            if(usuario.getClienteCollection().iterator().hasNext()){
-                cliente = usuario.getClienteCollection().iterator().next();
-                if(cliente!=null){
-                    return cliente.getNome();
-                }
-            }
-        }
+//        Cliente cliente;
+//        if(usuario!=null&&usuario.getClienteCollection()!=null){
+//            if(usuario.getClienteCollection().iterator().hasNext()){
+//                cliente = usuario.getClienteCollection().iterator().next();
+//                if(cliente!=null){
+//                    return cliente.getNome();
+//                }
+//            }
+//        }
         return "";
     }
     
@@ -75,11 +75,11 @@ public class LoginAction implements Serializable {
         this.usuario = usuario;
     }
 
-    public LoginDAO getLoginDAO() {
+    public LoginDaoImpl getLoginDAO() {
         return loginDAO;
     }
 
-    public void setLoginDAO(LoginDAO loginDAO) {
+    public void setLoginDAO(LoginDaoImpl loginDAO) {
         this.loginDAO = loginDAO;
     }
 

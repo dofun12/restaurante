@@ -36,9 +36,7 @@ public class Direito implements Serializable {
     @Size(max = 45)
     @Column(name = "descricao")
     private String descricao;
-    @ManyToMany(mappedBy = "direitoCollection")
-    private Collection<Grupo> grupoCollection;
-
+    
     public Direito() {
     }
 
@@ -60,15 +58,6 @@ public class Direito implements Serializable {
 
     public void setDescricao(String descricao) {
         this.descricao = descricao;
-    }
-
-    @XmlTransient
-    public Collection<Grupo> getGrupoCollection() {
-        return grupoCollection;
-    }
-
-    public void setGrupoCollection(Collection<Grupo> grupoCollection) {
-        this.grupoCollection = grupoCollection;
     }
 
     @Override

@@ -5,7 +5,7 @@
  */
 package com.pizzaria.restaurante.action;
 
-import com.pizzaria.restaurante.dao.LoginDAO;
+import com.pizzaria.restaurante.dao.impl.LoginDaoImpl;
 import com.pizzaria.restaurante.model.Cliente;
 import com.pizzaria.restaurante.model.Usuario;
 import java.io.Serializable;
@@ -25,11 +25,11 @@ public class CadastroAction implements Serializable {
     private String endereco;
     private String telefone;
     private String senha;
-    private LoginDAO loginDAO;
+    private LoginDaoImpl loginDAO;
     
     @PostConstruct
     public void init() {
-        loginDAO = new LoginDAO();
+        loginDAO = new LoginDaoImpl();
     }
 
     public void cadastrar(){

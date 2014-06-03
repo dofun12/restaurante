@@ -7,7 +7,9 @@
 package com.pizzaria.restaurante.model;
 
 import java.io.Serializable;
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
+import javax.persistence.Id;
 import javax.persistence.Table;
 
 /**
@@ -17,5 +19,15 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "Grupo_Usuario")
 public class GrupoUsuario implements Serializable{
-    
+    @Id
+    @Embedded
+    private GrupoUsuarioPK id;
+
+    public GrupoUsuarioPK getId() {
+        return id;
+    }
+
+    public void setId(GrupoUsuarioPK id) {
+        this.id = id;
+    }
 }
