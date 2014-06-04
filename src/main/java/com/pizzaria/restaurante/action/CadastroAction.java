@@ -49,8 +49,12 @@ public class CadastroAction implements Serializable {
                 u.setLogin(login);
                 u.setSenha(senha);
                 u.setAtivo(true);
-                loginDAO.salvar(u, c);
-                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,"Sucesso","Cadastro efetuado sem problemas"));
+                if(loginDAO.getUsuario(login)==null){
+                    loginDAO.salvarDireitoBasico(u, c);
+                    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,"Sucesso","Cadastro efetuado sem problemas"));
+                }else{
+                    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"Erro","O login "+login+" já esta sendo usado"));
+                }    
             }    
         }catch(Exception e){
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"Erro","Erro ao cadastrar"));

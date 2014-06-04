@@ -7,8 +7,11 @@ package com.pizzaria.restaurante.action;
 
 import com.pizzaria.restaurante.dao.LoginDao;
 import com.pizzaria.restaurante.dao.impl.LoginDaoImpl;
+import com.pizzaria.restaurante.model.Direito;
 import com.pizzaria.restaurante.model.Usuario;
 import java.io.Serializable;
+import java.util.HashMap;
+import java.util.Map;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
@@ -28,6 +31,8 @@ public class LoginAction implements Serializable {
     private LoginDao loginDAO;
     private String login;
     private String senha;
+    private Map<Integer,Boolean> direitos = new HashMap<Integer,Boolean>();
+    
     
     
     @PostConstruct
@@ -48,10 +53,25 @@ public class LoginAction implements Serializable {
         return "";
     }
     
+    
+    public void listarDireitos(){
+        for(Direito d:loginDAO.listarDireitos()){
+            direitos.put(d.getId(),false);
+        }
+        for(Map<String,Object> map:loginDAO.listarDireitos(login)){
+            if(map.get("codigo")!=null){
+                Integer codigo = (Integer)map.get("codigo");
+                direitos.put(codigo,true);
+            }
+        }
+    }
+    
+    
     public String logar(){
         Usuario u = loginDAO.getUsuario(login, senha);
         if(u!=null){
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,"Olá",u.getLogin()));
+            listarDireitos();
             return "home.jsf";
         }else{
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"Aviso","Usuario ou senha incorretos"));
@@ -59,6 +79,10 @@ public class LoginAction implements Serializable {
         return "";
     }
 
+    public boolean getDireito(Integer codigo){
+        return direitos.get(codigo);
+    }
+    
     public Usuario getUsuario() {
         return usuario;
     }
@@ -90,6 +114,15 @@ public class LoginAction implements Serializable {
 
     public void setSenha(String senha) {
         this.senha = senha;
+    }
+    
+
+    public Map<Integer, Boolean> getDireitos() {
+        return direitos;
+    }
+
+    public void setDireitos(Map<Integer, Boolean> direitos) {
+        this.direitos = direitos;
     }
     
 }

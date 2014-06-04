@@ -2,7 +2,7 @@
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:p="http://primefaces.org/ui"
-      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:f="http://java.sun.com/jsf/core"
       template="default.xhtml">
     <ui:define name="title">Login</ui:define>
     <ui:define name="body">
@@ -16,8 +16,8 @@
                         <h:outputText value="Login" />
                         <p:inputText value="#{login.login}"/>
                         <h:outputText value="Senha" />
-                        <p:inputText value="#{login.senha}"/>
-                        <p:commandButton value="Enviar" action="#{login.logar}" />
+                        <p:password value="#{login.senha}"/>
+                        <p:commandButton ajax="false" value="Enviar" action="#{login.logar}" />
                     </h:panelGrid>
                 </h:form>
             </p:layoutUnit>
