@@ -8,6 +8,8 @@ package com.pizzaria.restaurante.dao.impl;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.EntityTransaction;
 import javax.persistence.PersistenceContext;
 import org.hibernate.Session;
 
@@ -29,6 +31,15 @@ public class GenericDao<T> implements Serializable{
         return session;
     }
 
+    public void persist(Object obj){
+        try{
+            getEm().persist(obj);
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        getEm().flush();
+    }
+    
     public List<?> listObject(Class classe){
         return getSession().createQuery("from "+classe.getSimpleName()+" x").list();
     }

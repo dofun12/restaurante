@@ -8,12 +8,13 @@
     <class>com.pizzaria.restaurante.model.Grupo</class>
     <class>com.pizzaria.restaurante.model.GrupoUsuario</class>
     <class>com.pizzaria.restaurante.model.Usuario</class>
-    <properties>
-        <!-- Propriedades -->
-        <property name="hibernate.show_sql" value="false"/>
-        <property name="hibernate.format_sql" value="false"/>
-        <property name="hibernate.connection.dialect" value="org.hibernate.dialect.MySQLDialect" />
+    <class>com.pizzaria.restaurante.model.UsuarioCliente</class>
 
+    <properties>
+      <!-- Propriedades -->
+      <property name="hibernate.show_sql" value="false"/>
+      <property name="hibernate.format_sql" value="false"/>
+      <property name="hibernate.connection.dialect" value="org.hibernate.dialect.MySQLDialect"/>
     </properties>
   </persistence-unit>
 </persistence>

@@ -6,20 +6,24 @@
 package com.pizzaria.restaurante.action;
 
 import com.pizzaria.restaurante.dao.LoginDao;
-import com.pizzaria.restaurante.dao.impl.LoginDaoImpl;
 import com.pizzaria.restaurante.model.Cliente;
 import com.pizzaria.restaurante.model.Usuario;
 import java.io.Serializable;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
-import javax.enterprise.context.SessionScoped;
+import javax.enterprise.context.ConversationScoped;
+import javax.faces.application.FacesMessage;
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ViewScoped;
+import javax.faces.context.FacesContext;
 import javax.inject.Named;
+
 
 /**
  *
  * @author kevim
  */
-@SessionScoped
+@ConversationScoped
 @Named(value = "cadastro")
 public class CadastroAction implements Serializable {
     private String nome;
@@ -32,18 +36,26 @@ public class CadastroAction implements Serializable {
     
     @PostConstruct
     public void init() {
-        loginDAO = new LoginDaoImpl();
     }
 
     public void cadastrar(){
-        Cliente c = new Cliente();
-        c.setTelefone(telefone);
-        c.setEndereco(endereco);
-        c.setNome(nome);
-        Usuario u = new Usuario();
-        u.setLogin(login);
-        u.setSenha(senha);
-        loginDAO.salvar(u, c);
+        try{
+            if(login!=null){
+                Cliente c = new Cliente();
+                c.setTelefone(telefone);
+                c.setEndereco(endereco);
+                c.setNome(nome);
+                Usuario u = new Usuario();
+                u.setLogin(login);
+                u.setSenha(senha);
+                u.setAtivo(true);
+                loginDAO.salvar(u, c);
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,"Sucesso","Cadastro efetuado sem problemas"));
+            }    
+        }catch(Exception e){
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"Erro","Erro ao cadastrar"));
+            e.printStackTrace();
+        }
     }
     
     public String getNome() {

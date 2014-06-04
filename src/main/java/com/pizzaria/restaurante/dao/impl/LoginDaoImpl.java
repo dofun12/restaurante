@@ -11,6 +11,8 @@ import com.pizzaria.restaurante.model.Cliente;
 import com.pizzaria.restaurante.model.GrupoUsuario;
 import com.pizzaria.restaurante.model.GrupoUsuarioPK;
 import com.pizzaria.restaurante.model.Usuario;
+import com.pizzaria.restaurante.model.UsuarioCliente;
+import com.pizzaria.restaurante.model.UsuarioClientePK;
 import javax.ejb.Local;
 import javax.ejb.Stateless;
 import org.hibernate.Query;
@@ -33,16 +35,16 @@ public class LoginDaoImpl extends GenericDao<Usuario> implements LoginDao{
     }
     @Override
     public void salvar(Usuario u,Cliente c){
-        GrupoUsuario gu = new GrupoUsuario();
-        getEm().persist(c);
-        getEm().persist(u);
+        UsuarioCliente uc = new UsuarioCliente();
+        persist(c);
+        
+        persist(u);
         
         Integer codigo = c.getId();
         String login = u.getLogin();
         
-        GrupoUsuarioPK pk = new GrupoUsuarioPK(codigo, login);
-        gu.setId(pk);
-        getEm().persist(gu);
-        getEm().flush();
+        UsuarioClientePK pk = new UsuarioClientePK(codigo, login);
+        uc.setId(pk);
+        persist(uc);
     }
 }
