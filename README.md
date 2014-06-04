@@ -1,4 +1,4 @@
 restaurante
 ===========
 
-Site de um Restaurante usando JSF 2.2,Primefaces 4.0 and Hibernate 4.0
+Site de um Restaurante usando JSF 2.1,Primefaces 5.0 and Hibernate 4.0
