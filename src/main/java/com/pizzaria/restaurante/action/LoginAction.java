@@ -32,7 +32,6 @@ public class LoginAction implements Serializable {
     
     @PostConstruct
     public void init() {
-        loginDAO = new LoginDaoImpl();
         
     }
 
@@ -52,6 +51,7 @@ public class LoginAction implements Serializable {
     public String logar(){
         Usuario u = loginDAO.getUsuario(login, senha);
         if(u!=null){
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,"Olá",u.getLogin()));
             return "home.jsf";
         }else{
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"Aviso","Usuario ou senha incorretos"));
