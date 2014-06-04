@@ -7,7 +7,7 @@
     <ui:define name="title">Login</ui:define>
     <ui:define name="body">
         <p:layout fullPage="true">
-            <p:layoutUnit position="north" size="60">
+            <p:layoutUnit position="north" size="70">
                 <ui:include src="menu.xhtml"/>
             </p:layoutUnit>
             <p:layoutUnit position="center">
@@ -21,7 +21,13 @@
                         <p:password id="pwd1" value="#{cadastro.senha}" match="pwd2" label="Password 1" required="true" feedback="true" inline="true" />
                         <h:outputText value="Confirme a senha" />
                         <p:password id="pwd2" value="#{cadastro.senha}" required="true"/>
-                        <h:outputText value="Endereco" />
+                        <h:outputText value="Estado" />
+                        <p:inputText value="#{cadastro.estado}" />
+                        <h:outputText value="Cidade" />
+                        <p:inputText value="#{cadastro.cidade}" />
+                        <h:outputText value="Bairro" />
+                        <p:inputText value="#{cadastro.bairro}" />
+                        <h:outputText value="Endereco(Rua e numero)" />
                         <p:inputText value="#{cadastro.endereco}" />
                         <h:outputText value="Telefone/Celular" />
                         <p:inputText value="#{cadastro.telefone}" />

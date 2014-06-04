@@ -35,6 +35,9 @@ CREATE TABLE `Cliente` (
   `nome` varchar(45) DEFAULT NULL,
   `endereco` varchar(200) DEFAULT NULL,
   `telefone` varchar(20) DEFAULT NULL,
+  `bairro` varchar(200) DEFAULT NULL,
+  `cidade` varchar(200) DEFAULT NULL,
+  `estado` varchar(2) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=34 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -45,7 +48,7 @@ CREATE TABLE `Cliente` (
 
 LOCK TABLES `Cliente` WRITE;
 /*!40000 ALTER TABLE `Cliente` DISABLE KEYS */;
-INSERT INTO `Cliente` VALUES (1,'asdasd','sadas','dsada'),(2,'sadasd','sdasd','asda'),(3,'sadasd','sdasd','asda'),(4,'sadasd','sdasd','asda'),(5,'sadasd','sdasd','asda'),(6,'sadasd','sdasd','asda'),(7,'adasda','123123','123123'),(8,'3453453','wqeqeqw','qweewqe'),(9,'3453453','wqeqeqw','qweewqe'),(10,'3453453','wqeqeqw','qweewqe'),(11,'546456','21313','13123'),(12,'546456','21313','13123'),(13,'34234','sdasdas','asdasd'),(14,'sadas','sdasd','asda'),(15,'asdasd','sadas','asd'),(29,'asdasd','asdsad','asda'),(30,'asdas','asdasd','asdasd'),(31,'123123','asdas','asdas'),(32,'Kevim','asdasd','asdas'),(33,'adasd','asdasd','asdasd');
+INSERT INTO `Cliente` VALUES (1,'asdasd','sadas','dsada',NULL,NULL,NULL),(2,'sadasd','sdasd','asda',NULL,NULL,NULL),(3,'sadasd','sdasd','asda',NULL,NULL,NULL),(4,'sadasd','sdasd','asda',NULL,NULL,NULL),(5,'sadasd','sdasd','asda',NULL,NULL,NULL),(6,'sadasd','sdasd','asda',NULL,NULL,NULL),(7,'adasda','123123','123123',NULL,NULL,NULL),(8,'3453453','wqeqeqw','qweewqe',NULL,NULL,NULL),(9,'3453453','wqeqeqw','qweewqe',NULL,NULL,NULL),(10,'3453453','wqeqeqw','qweewqe',NULL,NULL,NULL),(11,'546456','21313','13123',NULL,NULL,NULL),(12,'546456','21313','13123',NULL,NULL,NULL),(13,'34234','sdasdas','asdasd',NULL,NULL,NULL),(14,'sadas','sdasd','asda',NULL,NULL,NULL),(15,'asdasd','sadas','asd',NULL,NULL,NULL),(29,'asdasd','asdsad','asda',NULL,NULL,NULL),(30,'asdas','asdasd','asdasd',NULL,NULL,NULL),(31,'123123','asdas','asdas',NULL,NULL,NULL),(32,'Kevim','asdasd','asdas',NULL,NULL,NULL),(33,'adasd','asdasd','asdasd',NULL,NULL,NULL);
 /*!40000 ALTER TABLE `Cliente` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -216,4 +219,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2014-06-04 14:24:28
+-- Dump completed on 2014-06-04 14:49:53

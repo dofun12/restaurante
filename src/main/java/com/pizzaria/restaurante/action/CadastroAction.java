@@ -30,6 +30,9 @@ public class CadastroAction implements Serializable {
     private String login;
     private String endereco;
     private String telefone;
+    private String bairro;
+    private String estado;
+    private String cidade;
     private String senha;
     @EJB
     private LoginDao loginDAO;
@@ -43,6 +46,9 @@ public class CadastroAction implements Serializable {
             if(login!=null){
                 Cliente c = new Cliente();
                 c.setTelefone(telefone);
+                c.setCidade(cidade);
+                c.setEstado(estado);
+                c.setBairro(bairro);
                 c.setEndereco(endereco);
                 c.setNome(nome);
                 Usuario u = new Usuario();
@@ -100,6 +106,38 @@ public class CadastroAction implements Serializable {
 
     public void setSenha(String senha) {
         this.senha = senha;
+    }
+
+    public String getBairro() {
+        return bairro;
+    }
+
+    public void setBairro(String bairro) {
+        this.bairro = bairro;
+    }
+
+    public String getEstado() {
+        return estado;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
+    }
+
+    public String getCidade() {
+        return cidade;
+    }
+
+    public void setCidade(String cidade) {
+        this.cidade = cidade;
+    }
+
+    public LoginDao getLoginDAO() {
+        return loginDAO;
+    }
+
+    public void setLoginDAO(LoginDao loginDAO) {
+        this.loginDAO = loginDAO;
     }
 
     
