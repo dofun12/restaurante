@@ -8,6 +8,8 @@ package com.pizzaria.restaurante.dao;
 
 import com.pizzaria.restaurante.model.Cliente;
 import com.pizzaria.restaurante.model.Direito;
+import com.pizzaria.restaurante.model.Pedido;
+import com.pizzaria.restaurante.model.Pizza;
 import com.pizzaria.restaurante.model.Usuario;
 import java.util.List;
 import java.util.Map;
@@ -31,5 +33,17 @@ public interface LoginDao {
     public List<Map<String, Object>> listarDireitos(String login);
 
     public List<Direito> listarDireitos();
+
+    public List<Pizza> listarPizzas();
+
+    public void gerarPedido(String login, Float total, List<Pizza> pizzas);
+
+    public List<Map<String, Object>> getListPedidos(String login,Integer codigoPedigo);
+
+    public List<Pedido> getTodosPedidosUsuario(String usuario);
+
+    public List<Pedido> getTodosPedidos();
+
+    public void mudarSituacao(Integer pedido);
     
 }

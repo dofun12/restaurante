@@ -1,0 +1,55 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://java.sun.com/jsf/core"
+                template="default.xhtml">
+    <ui:define name="title">Login</ui:define>
+    <ui:define name="body">
+        <p:layout fullPage="true">
+            <p:layoutUnit position="north" size="70">
+                <ui:include src="menu.xhtml"/>
+            </p:layoutUnit>
+            <p:layoutUnit position="center">
+                <h:form id="form_pizza">
+                    <p:dataGrid id="gridPedidos" value="#{login.pedidos}" columns="2" var="pedido">
+                        <p:panel>
+                            <f:facet name="header">
+
+                                <h:outputText value="#{pedido.dataPedido}" >
+                                    <f:convertDateTime pattern="dd/MM/yyyy HH:mm" />
+                                </h:outputText>
+                            </f:facet>
+                            <h:outputText rendered="#{login.getDireito(5)}" value="Pedido: #{pedido.id}" /><br />
+                            <h:outputText rendered="#{login.getDireito(5)}" value="Usuario: " />
+                            <h:outputText rendered="#{login.getDireito(5)}" value="#{pedido.login}" /><br />
+                            <p:dataTable value="#{login.getDetalhesPedido(pedido)}" var="pizza" >
+
+                                <f:facet name="footer">
+                                    <h:outputText value="Total: " />
+                                    <h:outputText value="#{pedido.preco}" >
+                                        <f:convertNumber pattern="'R$'0.00" />
+                                    </h:outputText>
+                                </f:facet>
+                                <p:column headerText="Produto">
+                                    <h:outputText value="#{pizza['nome']}" />
+                                </p:column>
+                                <p:column headerText="Preco">
+                                    <h:outputText value="#{pizza['preco']}" >
+                                        <f:convertNumber pattern="'R$'0.00" />
+                                    </h:outputText>
+                                </p:column>
+                                <p:column headerText="Status">
+                                    <h:outputText value="#{pizza['descricao']}" />
+                                </p:column>
+                            </p:dataTable>
+                            <p:commandButton value="Marcar como Entregue" update=":form_pizza:" actionListener="#{login.marcarComoEntregue}" rendered="#{pedido.codSit==1 and login.getDireito(5)}" >
+                                <f:attribute name="codigo" value="#{pedido.id}" />
+                            </p:commandButton>
+                        </p:panel>
+                    </p:dataGrid>
+                </h:form>
+            </p:layoutUnit>
+        </p:layout>
+    </ui:define>
+</ui:composition>

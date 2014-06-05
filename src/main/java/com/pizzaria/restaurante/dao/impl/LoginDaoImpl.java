@@ -11,9 +11,14 @@ import com.pizzaria.restaurante.model.Direito;
 import com.pizzaria.restaurante.model.Grupo;
 import com.pizzaria.restaurante.model.GrupoUsuario;
 import com.pizzaria.restaurante.model.GrupoUsuarioPK;
+import com.pizzaria.restaurante.model.Pedido;
+import com.pizzaria.restaurante.model.PedidoPizzas;
+import com.pizzaria.restaurante.model.PedidoPizzasPK;
+import com.pizzaria.restaurante.model.Pizza;
 import com.pizzaria.restaurante.model.Usuario;
 import com.pizzaria.restaurante.model.UsuarioCliente;
 import com.pizzaria.restaurante.model.UsuarioClientePK;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import javax.ejb.Local;
@@ -55,8 +60,8 @@ public class LoginDaoImpl extends GenericDao<Usuario> implements LoginDao {
 
     public void salvarDireitoBasico(Usuario u, Cliente c) {
         UsuarioCliente uc = new UsuarioCliente();
-        persist(c);
-        persist(u);
+        getEm().persist(c);
+        getEm().persist(u);
 
         Integer codigo = c.getId();
         String login = u.getLogin();
@@ -65,11 +70,11 @@ public class LoginDaoImpl extends GenericDao<Usuario> implements LoginDao {
         GrupoUsuario gu = new GrupoUsuario();
         GrupoUsuarioPK guPk = new GrupoUsuarioPK(g.getId(), login);
         gu.setId(guPk);
-        persist(gu);
+        getEm().persist(gu);
 
         UsuarioClientePK pk = new UsuarioClientePK(codigo, login);
         uc.setId(pk);
-        persist(uc);
+        getEm().persist(uc);
     }
 
     @Override
@@ -101,4 +106,63 @@ public class LoginDaoImpl extends GenericDao<Usuario> implements LoginDao {
         q.setString("login", login);
         return q.list();
     }
+
+    public List<Pizza> listarPizzas() {
+        return getEm().createQuery("from Pizza a ").getResultList();
+    }
+
+    public void gerarPedido(String login, Float total, List<Pizza> pizzas) {
+        Pedido pedido = new Pedido();
+        pedido.setLogin(login);
+        pedido.setPreco(total);
+        pedido.setDataPedido(new Date());
+        pedido.setCodSit(1);
+        getEm().persist(pedido);
+
+        for (Pizza p : pizzas) {
+            Integer cod = p.getId();
+            PedidoPizzas pedidoPizzas = new PedidoPizzas();
+            PedidoPizzasPK pk = new PedidoPizzasPK(pedido.getId(), cod);
+            pedidoPizzas.setPedidoPizzasPK(pk);
+            getEm().persist(pedidoPizzas);
+        }
+
+    }
+
+    public void mudarSituacao(Integer pedido){
+        Pedido p = getEm().find(Pedido.class,pedido);
+        if(p!=null){
+            p.setCodSit(2);
+        }
+        getEm().merge(p);
+    }
+    
+    public List<Map<String, Object>> getListPedidos(String login,Integer codigoPedido) {
+        Query q = getSession().createSQLQuery(
+                "select "
+                + "	pz.nom as nome, "
+                + "	pz.prix as preco, "
+                + "	s.descricao "
+                + "from pedido p "
+                + "inner join pedido_pizzas pp "
+                + "	on pp.id_pedido = p.id "
+                + "inner join pizza pz "
+                + "	on pz.id = pp.id_pizza "
+                + "inner join situacao s "
+                + "	on p.id_situacao = s.id "
+                + "where "
+                + "	p.login = :login "
+                + " and p.id = :codigo");
+        q.setString("login", login);
+        q.setInteger("codigo",codigoPedido);
+        q.setResultTransformer(Transformers.ALIAS_TO_ENTITY_MAP);
+        return q.list();
+    }
+    public List<Pedido> getTodosPedidosUsuario(String usuario){
+        return getSession().createQuery("from Pedido p where p.login = :login").setString("login", usuario).list();
+    }
+    public List<Pedido> getTodosPedidos(){
+        return getSession().createQuery("from Pedido p").list();
+    }
+    
 }

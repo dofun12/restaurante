@@ -1,9 +1,9 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:p="http://primefaces.org/ui"
-      xmlns:f="http://xmlns.jcp.org/jsf/core"
-      template="default.xhtml">
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://java.sun.com/jsf/core"
+                template="default.xhtml">
     <ui:define name="title">Pizzaria Alema</ui:define>
     <ui:define name="body">
         <p:layout fullPage="true">
@@ -12,11 +12,46 @@
             </p:layoutUnit>
             <p:layoutUnit position="center">
                 <h:form>
-                    
+                    <div style="width: 60%;float:left;overflow: auto;height: 500px;">
+                        <p:graphicImage style="margin-left: 100px;" value="images/banner.png" width="600" height="75"/><br />
+
+                        <h:outputText value="" />
+                        <p:galleria style="margin-left: 100px;" autoPlay="true" transitionInterval="3000" value="#{login.banners}" var="image" panelWidth="600" panelHeight="300" showCaption="true">
+                            <p:graphicImage value="#{image['link']}" width="600" height="200"  title="#{image['descricao']}"/>
+                        </p:galleria>
+                        <p:spacer height="70" />
+                        <div style="width: 600px;display: block;margin-left: 100px;">
+                            <p:separator />
+                            <h3>Fale Conosco</h3>
+                            <h:panelGrid columns="2" >
+                                <h:outputText value="Telefone: " />
+                                <h:outputText value="(11)21213131" />
+                                <h:outputText value="Endereco: " />
+                                <h:outputText value="Rua Das alvoradas negras Nº 123 - Guarulhos - SP" />
+                            </h:panelGrid>
+                        </div>
+                    </div>
+                    <div style="width: 40%;float:right;">
+                        <p:dataGrid var="pizza" value="#{login.listarPizza}" columns="1"
+                                    rows="5" paginator="true">
+                            <f:facet name="header">
+                                <h:outputText value="Pizzas disponiveis"/>
+                            </f:facet>
+                            <div style="border: 1px solid #ccc">
+                                <p:graphicImage value="#{pizza.image}" /> 
+                                <h:outputText style="padding-bottom: 10px;" value="#{pizza.nom}"/>
+                            </div>
+                        </p:dataGrid>
+                        <span style="text-align: right;width: 100%;font-size: x-small;float: right;">
+                            Powered by a little hamster
+                        </span>
+                    </div>
+
+
                 </h:form>
-                <p:spacer height="20" />
+
                 <div class="banner-image">
-                    
+
                 </div>
             </p:layoutUnit>
         </p:layout>

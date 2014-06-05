@@ -1,18 +1,45 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:p="http://primefaces.org/ui"
-      xmlns:f="http://xmlns.jcp.org/jsf/core"
-      template="default.xhtml">
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://java.sun.com/jsf/core"
+                template="default.xhtml">
     <ui:define name="title">Login</ui:define>
     <ui:define name="body">
         <p:layout fullPage="true">
             <p:layoutUnit position="north" size="70">
                 <ui:include src="menu.xhtml"/>
             </p:layoutUnit>
-            <p:layoutUnit position="center">
+            <p:layoutUnit position="west" size="400">
                 <h:form>
-                    
+                    <p:dataGrid var="pizza" value="#{login.listarPizza}" columns="1"
+                                >
+                        <f:facet name="header">
+                            <h:outputText value="Pizzas disponiveis"/>
+                        </f:facet>
+                        <div style="border: 1px solid #ccc">
+                            <p:graphicImage value="#{pizza.image}" /> 
+                            <h:outputText style="padding-bottom: 10px;" value="#{pizza.nom}"/>
+                            <p:commandButton update=":form_pizza:" icon="ui-icon-plus" style="float: right;" actionListener="#{login.adicionarPizza}" rendered="#{login.logado}" >
+                                <f:attribute name="pizza" value="#{pizza}" />
+                            </p:commandButton>
+                            <p:commandButton icon="ui-icon-plus" style="float: right;" rendered="#{!login.logado}" disabled="true" title="Voce precisa estar logado"  />
+                        </div>
+                    </p:dataGrid>
+                </h:form>
+            </p:layoutUnit>
+            <p:layoutUnit position="center">
+                <h:form id="form_pizza">
+                    <p:dataTable value="#{login.pizzasSelecionadas}" var="pizza" >
+                        <p:column headerText="Produto">
+                            <h:outputText value="#{pizza.nom}" />
+                        </p:column>
+                        <p:column headerText="Preco">
+                            <h:outputText value="#{pizza.prix}" />
+                        </p:column>
+                    </p:dataTable>
+                    <h:outputText value="Total: #{login.getTotalPizza()}" />
+                    <p:commandButton value="Pedir" action="#{login.pedir}" />
                 </h:form>
             </p:layoutUnit>
         </p:layout>
